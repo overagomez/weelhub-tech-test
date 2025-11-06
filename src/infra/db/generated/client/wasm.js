@@ -92,9 +92,44 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  surname: 'surname',
+  email: 'email',
+  phoneNumberSuffix: 'phoneNumberSuffix',
+  phoneNumberPrefix: 'phoneNumberPrefix',
+  identityDocNumber: 'identityDocNumber',
+  identityDocType: 'identityDocType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.IdentityDocType = exports.$Enums.IdentityDocType = {
+  DNI: 'DNI',
+  PASSPORT: 'PASSPORT',
+  NIF: 'NIF',
+  NIE: 'NIE',
+  OTHER: 'OTHER'
+};
 
 exports.Prisma.ModelName = {
-
+  User: 'User'
 };
 /**
  * Create the Client
@@ -125,7 +160,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../../.env"
   },
   "relativePath": "../..",
@@ -135,7 +170,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -144,13 +178,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n",
-  "inlineSchemaHash": "c3ba0f57a55de997f1d4331e841443bc04097bdf65da55097fb44d65822d07ff",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id                String          @id @default(uuid())\n  name              String\n  surname           String\n  email             String\n  phoneNumberSuffix String\n  phoneNumberPrefix String\n  identityDocNumber String\n  identityDocType   IdentityDocType\n  createdAt         DateTime        @default(now())\n  updatedAt         DateTime        @updatedAt\n  deletedAt         DateTime?\n}\n\nenum IdentityDocType {\n  DNI\n  PASSPORT\n  NIF\n  NIE\n  OTHER\n}\n",
+  "inlineSchemaHash": "6a7d02c291abf62dda97dee3283f9a5680ba6e7550f6a50260eea5fa35033d33",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"surname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumberSuffix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumberPrefix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"identityDocNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"identityDocType\",\"kind\":\"enum\",\"type\":\"IdentityDocType\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"deletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

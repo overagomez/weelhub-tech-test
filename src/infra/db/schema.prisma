@@ -9,12 +9,23 @@ datasource db {
 }
 
 model User {
-  id              String  @id @default(uuid())
-  name            String
-  surname         String
-  phoneNumber     String
-  profilePicture  String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  deletedAt       DateTime?
+  id                String  @id @default(uuid())
+  name              String
+  surname           String
+  email             String
+  phoneNumberSuffix String
+  phoneNumberPrefix String
+  identityDocNumber String
+  identityDocType   IdentityDocType
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  deletedAt         DateTime?
+}
+
+enum IdentityDocType {
+  DNI
+  PASSPORT
+  NIF
+  NIE
+  OTHER
 }

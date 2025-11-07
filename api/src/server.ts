@@ -1,12 +1,6 @@
-import cors from "cors";
 import express, { type Express } from "express";
 import { registerRoutes } from "./infra/http/routes/index.js";
-
-
-type DomainCache = {
-	allowed: boolean;
-	timestamp: number;
-};
+import cors from "cors";
 
 export class Server {
 	private app: Express;
@@ -16,10 +10,6 @@ export class Server {
 		this.app = express();
 		this.loadMiddlewares();
 		this.loadRoutes();
-	}
-
-	private isCacheValid(cached: DomainCache): boolean {
-		return Date.now() - cached.timestamp < this.CACHE_TTL;
 	}
 
 	start() {
@@ -33,6 +23,12 @@ export class Server {
 	}
 
 	loadMiddlewares() {
+		
+		this.app.use(cors({
+  			origin: "*", // or "http://localhost:3001" if you want to restrict it
+  			methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  			allowedHeaders: ["Content-Type"],
+		}));
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: true }));
 	}

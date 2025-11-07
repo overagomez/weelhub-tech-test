@@ -6,9 +6,10 @@
   "type": "module",
   "prisma.schema": "src/infra/db/schema.prisma",
   "scripts": {
+    "dev": "next dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:generate": "prisma generate --schema=src/infra/db/schema.prisma",
-    "db:push": "prisma db push --schema=src/infra/db/schema.prisma"
+    "db:generate": "prisma generate --schema=api/src/infra/db/schema.prisma",
+    "db:push": "prisma db push --schema=api/src/infra/db/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +19,11 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "lucide-react": "^0.552.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/glob": "^8.1.0",

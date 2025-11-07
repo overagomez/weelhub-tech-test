@@ -6,8 +6,7 @@ import { UserAlreadyExists } from "../../../../contexts/users/domain/errors/User
 
 export class CreateUserController implements Controller {
 	async handle(request: Request, response: Response): Promise<Response> {
-		const {
-			id,                
+		const {               
             name,              
             surname,    
             email,       
@@ -19,7 +18,6 @@ export class CreateUserController implements Controller {
 
 		try {
 			const course = await new CreateUserUseCase(new UserRepository()).execute(
-				id,
                 name,              
                 surname,    
                 email,       
@@ -35,7 +33,7 @@ export class CreateUserController implements Controller {
 			if (error instanceof UserAlreadyExists) {
 				return response.status(400).json({ message: error.message });
 			}
-			return response.status(500).json({ message: "Internal server error" });
+			return response.status(500).json({ message: "Internal server error sss" });
 		}
 	}
 }

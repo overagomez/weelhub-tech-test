@@ -2,7 +2,6 @@ import { UserAlreadyExists } from "../domain/errors/UserAlreadyExists.js";
 import { User } from "../domain/User.js";
 import type { UserRepositoryDefinition } from "../domain/UserRepositoryDefinition.js";
 import { Email } from "../domain/vo/Email.js";
-import { Id } from "../domain/vo/Id.js";
 import { IdentityDocNumber } from "../domain/vo/IdentityDocNumber.js";
 import { IdentityDocType, IdentityDocTypes } from "../domain/vo/IdentityDocType.js";
 import { IdentityDocument } from "../domain/vo/IdentityDocument.js";
@@ -15,8 +14,7 @@ import { Surname } from "../domain/vo/Surname.js";
 export class CreateUserUseCase {
 	constructor(private readonly userRepository: UserRepositoryDefinition) {}
 
-	async execute(
-			id: string,                
+	async execute(            
 			name: string,              
 			surname: string,    
 			email: string,
@@ -31,8 +29,7 @@ export class CreateUserUseCase {
 			throw new UserAlreadyExists("User already exists");
 		}
 
-		const user = User.create(
-			new Id(id),                
+		const user = User.create(               
 			new Name(name),              
 			new Surname(surname),    
 			new Email(email),       

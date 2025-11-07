@@ -7,22 +7,12 @@
 - pnpm  
 
 ## ⚙️ 1. Create .env
-DATABASE_URL="postgresql://wheelhub:wheelhub@localhost:5432/wheelhub"
+use .env-example
 
 ## 🐘 2. Start Database
-docker compose up -d
+docker compose up -d --build
 
-## 📦 3. Install Dependencies
-pnpm install
-
-## 🧩 4. Generate Prisma Client
-pnpm run db:generate
-
-## 🗃️ 5. Push Database Schema
-pnpm run db:push
-
-## 🧠 6. Run API
-pnpm run dev 
+run again docker compose up -d --build
 
 ## 🧰 package.json Scripts
 {
@@ -39,3 +29,8 @@ pnpm run dev
 | 2️⃣ | pnpm install |
 | 3️⃣ | pnpm run db:generate |
 | 4️⃣ | pnpm run db:push |
+
+
+## Open in browser
+
+Open in browser with localhost:3001

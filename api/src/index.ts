@@ -1,10 +1,7 @@
 import "dotenv/config";
 import { Server } from "./server.js";
 
-try {
-	const server = new Server(Number(process.env.PORT) || 3000);
-	server.start();
-} catch (error) {
-	console.error(error);
-	process.exit(1);
-}
+const port = Number(process.env.PORT) || 4100;
+
+const server = new Server(port);
+server.start();

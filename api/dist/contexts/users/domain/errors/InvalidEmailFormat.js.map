@@ -1,0 +1,1 @@
+{"version":3,"file":"InvalidEmailFormat.js","sourceRoot":"","sources":["../../../../../src/contexts/users/domain/errors/InvalidEmailFormat.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,oBAAoB,EAAE,MAAM,uDAAuD,CAAC;AAE7F,MAAM,OAAO,kBAAmB,SAAQ,oBAAoB;IACjD,IAAI,GAAG,sBAAsB,CAAA;CACvC"}

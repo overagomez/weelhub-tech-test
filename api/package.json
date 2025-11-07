@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --enable-source-maps dist/index.js",
+    "dev": "ts-node-esm src/index.ts",
+    "db:generate": "prisma generate --schema=src/infra/db/schema.prisma",
+    "db:push": "prisma db push --schema=src/infra/db/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "glob": "^11.0.3",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/glob": "^9.0.0",
+    "@types/node": "^24.9.2",
+    "prisma": "^6.18.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

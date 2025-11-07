@@ -1,0 +1,11 @@
+import { DniValidator } from "./DniValidator.js";
+import { IdentityDocValidatorRegistry } from "./IdentityDocValidatorRegistry.js";
+import { NieValidator } from "./NieValidator.js";
+import { NifValidator } from "./NifValidator.js";
+import { OtherValidator } from "./OtherValidator.js";
+import { PassportValidator } from "./PassportValidator.js";
+IdentityDocValidatorRegistry.register("DNI", new DniValidator());
+IdentityDocValidatorRegistry.register("NIE", new NieValidator());
+IdentityDocValidatorRegistry.register("PASSPORT", new PassportValidator());
+IdentityDocValidatorRegistry.register("NIF", new NifValidator());
+IdentityDocValidatorRegistry.register("OTHER", new OtherValidator());

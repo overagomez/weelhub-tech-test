@@ -7,8 +7,8 @@ import { UserNotFound } from "../../../../contexts/users/domain/errors/UserNotFo
 
 export class UpdateUserController implements Controller {
     async handle(request: Request, response: Response): Promise<Response> {
-        const {
-            id,                
+        const id = request.params.id!;
+        const {              
             name,              
             surname,    
             email,       

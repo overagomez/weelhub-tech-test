@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+import { Uuid } from "../../shared/domain/vo/UuidVo.js";
 import { CreatedAt } from "./vo/CreatedAt.js";
 import { DeletedAt } from "./vo/DeletedAt.js";
 import { Email } from "./vo/Email.js";
@@ -25,8 +27,7 @@ export class User {
         readonly deletedAt: DeletedAt | null, 
     ) {}
 
-    public static create(
-        id: Id,                
+    public static create(             
         name: Name,              
         surname: Surname,    
         email: Email,       
@@ -34,7 +35,7 @@ export class User {
         identityDocument: IdentityDocument, 
     ) {
         return new User(
-            id,
+            new Uuid(v4()),
             name,
             surname,
             email,
@@ -87,8 +88,8 @@ export class User {
         email: string,        
         phoneNumberPrefix: string,       
         phoneNumberSuffix: string,       
-        identityDocumentNumber: string,      
-        identityDocumentType: string,      
+        identityDocNumber: string,      
+        identityDocType: string,      
         createdAt: Date,         
         updatedAt: Date,         
         deletedAt: Date | null, 
@@ -104,8 +105,8 @@ export class User {
                 new PhoneNumberSuffix(user.phoneNumberSuffix),
             ),
             new IdentityDocument(
-                new IdentityDocNumber(user.identityDocumentNumber),
-                new IdentityDocType(user.identityDocumentType as IdentityDocTypes)
+                new IdentityDocNumber(user.identityDocNumber),
+                new IdentityDocType(user.identityDocType as IdentityDocTypes)
             ),
             new CreatedAt(user.createdAt),
             new UpdatedAt(user.updatedAt),
@@ -121,8 +122,8 @@ export class User {
             email: this.email.valueOf(),
             phoneNumberPrefix: this.phoneNumber.phoneNumberPrefix.valueOf(),
             phoneNumberSuffix: this.phoneNumber.phoneNumberSuffix.valueOf(),
-            identityDocumentNumber: this.identityDocument.identityDocNumber.valueOf(),
-            identityDocumentType: this.identityDocument.identityDocType.valueOf(),
+            identityDocNumber: this.identityDocument.identityDocNumber.valueOf(),
+            identityDocType: this.identityDocument.identityDocType.valueOf(),
             createdAt: this.createdAt.valueOf(),
             updatedAt: this.updatedAt.valueOf(),
             deletedAt: this.deletedAt?.valueOf() ?? null,

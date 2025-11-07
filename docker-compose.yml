@@ -1,17 +1,56 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:16
+    container_name: user-list-db
     environment:
       POSTGRES_USER: wheelhub
       POSTGRES_PASSWORD: wheelhub
       POSTGRES_DB: wheelhub
     ports:
       - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
   api:
-    build: .
-    ports:
-      - "4000:4000"
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./api/.env
+    container_name: user-list-api
+    ports:
+      - "4100:4100"
+    environment:
+      NODE_ENV: production
+      PORT: 4100
+      DATABASE_URL: postgresql://wheelhub:wheelhub@db:5432/wheelhub?schema=public
     depends_on:
       - db
+    networks:
+      - app-network
+    command: ["pnpm", "start"]
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: user-list-web
+    ports:
+      - "3001:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4100
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
